@@ -18,7 +18,8 @@ function Login() {
 
   const checkIfPasswordSet = async () => {
     try {
-      const response = await fetch('/api/auth/check-password');
+      const apiUrl = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/auth/check-password` : '/api/auth/check-password';
+      const response = await fetch(apiUrl);
 
       if (!response.ok) {
         console.error('Server response not OK:', response.status);
@@ -55,7 +56,8 @@ function Login() {
     }
 
     try {
-      const response = await fetch('/api/auth/initialize-password', {
+      const apiUrl = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/auth/initialize-password` : '/api/auth/initialize-password';
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password: setupPassword })
@@ -91,7 +93,8 @@ function Login() {
     setError('');
 
     try {
-      const response = await fetch('/api/auth/verify-password', {
+      const apiUrl = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/auth/verify-password` : '/api/auth/verify-password';
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password })
