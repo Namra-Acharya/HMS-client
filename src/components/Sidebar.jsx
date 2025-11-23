@@ -127,8 +127,15 @@ function Sidebar() {
           ))}
         </nav>
 
-        <div className="p-3 sm:p-4 border-t-2 border-primary-200 bg-gradient-to-r from-primary-50 to-transparent">
-          <p className="text-xs text-medical-600 text-center font-semibold">HIMS v1.0</p>
+        <div className="p-3 sm:p-4 border-t-2 border-primary-200 bg-gradient-to-r from-primary-50 to-primary-100">
+          <div className="flex flex-col items-center gap-2">
+            <img src="https://cdn.builder.io/api/v1/image/assets%2F521006238d0c488b88ea924156fa8e07%2F99f3a89b07dd47cebd53e1166682c659?format=webp&width=800" alt="Nexus Group" className="h-6 object-contain" />
+            <div className="text-center">
+              <p className="text-xs font-bold text-gray-900">Nexus Group</p>
+              <p className="text-xs text-primary-600">Professional software developers</p>
+            </div>
+            <p className="text-xs text-medical-500 mt-1">© 2024 HIMS v1.0</p>
+          </div>
         </div>
       </div>
 
