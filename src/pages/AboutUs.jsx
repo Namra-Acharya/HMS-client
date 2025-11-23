@@ -5,12 +5,12 @@ function AboutUs() {
   return (
     <div className="space-y-8">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl p-12 text-white shadow-lg">
+      <div className="bg-gradient-to-r from-primary-50 to-primary-100 rounded-xl p-12 shadow-lg border border-primary-200">
         <div className="flex items-center gap-4 mb-4">
-          <img src="https://cdn.builder.io/api/v1/image/assets%2F521006238d0c488b88ea924156fa8e07%2F2398ede8c7114d498293aea234a3b3af?format=webp&width=800" alt="Nexus AI Group" className="h-16 object-contain" />
+          <img src="https://cdn.builder.io/api/v1/image/assets%2F521006238d0c488b88ea924156fa8e07%2F99f3a89b07dd47cebd53e1166682c659?format=webp&width=800" alt="Nexus Group" className="h-16 object-contain" />
           <div>
-            <h1 className="text-4xl font-bold">Nexus Group</h1>
-            <p className="text-primary-100 text-lg">Professional Hospital Information Management System</p>
+            <h1 className="text-4xl font-bold text-gray-900">Nexus Group</h1>
+            <p className="text-primary-700 text-lg">Professional Hospital Information Management System</p>
           </div>
         </div>
       </div>
