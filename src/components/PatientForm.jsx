@@ -82,15 +82,15 @@ function PatientForm({ patient, admissionType, onClose }) {
   return (
     <div className="modal-overlay">
       <div className="modal-content max-w-4xl">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">{patient ? 'Edit Patient' : 'Admit Patient'}</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+        <div className="flex justify-between items-center mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">{patient ? 'Edit Patient' : 'Admit Patient'}</h2>
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-700 p-1">
             <X size={24} />
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6 max-h-[70vh] overflow-y-auto pb-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 max-h-[70vh] overflow-y-auto pb-4 sm:pb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {/* Basic Info */}
             <div className="form-group">
               <label className="form-label">Full Name</label>
@@ -311,11 +311,11 @@ function PatientForm({ patient, admissionType, onClose }) {
           </div>
 
           {/* Buttons */}
-          <div className="flex gap-3 justify-end pt-6 border-t border-gray-200">
-            <button type="button" onClick={onClose} className="btn-secondary">
+          <div className="flex gap-2 sm:gap-3 justify-end pt-4 sm:pt-6 border-t border-gray-200 flex-col-reverse sm:flex-row">
+            <button type="button" onClick={onClose} className="btn-secondary w-full sm:w-auto">
               Cancel
             </button>
-            <button type="submit" disabled={loading} className="btn-primary">
+            <button type="submit" disabled={loading} className="btn-primary w-full sm:w-auto">
               {loading ? 'Saving...' : patient ? 'Update Patient' : 'Add Patient'}
             </button>
           </div>

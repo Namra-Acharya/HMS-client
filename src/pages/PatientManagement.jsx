@@ -83,17 +83,17 @@ function PatientManagement() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-gray-900">Patient Management</h1>
-        <button onClick={() => setShowForm(true)} className="btn-primary flex items-center gap-2">
-          <Plus size={20} />
+    <div className="space-y-4 sm:space-y-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+        <h1 className="page-title">Patient Management</h1>
+        <button onClick={() => setShowForm(true)} className="btn-primary flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
+          <Plus size={18} className="sm:w-5 sm:h-5" />
           Patient
         </button>
       </div>
 
       {/* Filters */}
-      <div className="card flex flex-col md:flex-row gap-6">
+      <div className="card flex flex-col gap-3 sm:gap-4 md:flex-row md:gap-6">
         <div className="flex-1 relative">
           <Search size={18} className="absolute left-3 top-3 text-gray-400" />
           <input
@@ -115,7 +115,7 @@ function PatientManagement() {
       {/* Patients Table */}
       <div className="card">
         <div className="card-header">
-          <h2 className="text-xl font-bold text-gray-900">All Patients ({filteredPatients.length})</h2>
+          <h2 className="section-title">All Patients ({filteredPatients.length})</h2>
         </div>
         {filteredPatients.length > 0 ? (
           <div className="table-responsive">
@@ -161,33 +161,33 @@ function PatientManagement() {
                     </td>
                     <td className="text-sm">{new Date(patient.admissionDate).toLocaleDateString()}</td>
                     <td>
-                      <div className="flex gap-2">
+                      <div className="flex gap-1 justify-center">
                         <button
                           onClick={() => {
                             setSelectedPatient(patient);
                             setShowDetail(true);
                           }}
-                          className="p-2 hover:bg-blue-50 rounded text-blue-600"
+                          className="p-1.5 sm:p-2 hover:bg-blue-50 rounded text-blue-600"
                           title="View Details"
                         >
-                          <Eye size={18} />
+                          <Eye size={16} className="sm:w-5 sm:h-5" />
                         </button>
                         <button
                           onClick={() => {
                             setSelectedPatient(patient);
                             setShowForm(true);
                           }}
-                          className="p-2 hover:bg-green-50 rounded text-green-600"
+                          className="p-1.5 sm:p-2 hover:bg-green-50 rounded text-green-600"
                           title="Edit"
                         >
-                          <Edit2 size={18} />
+                          <Edit2 size={16} className="sm:w-5 sm:h-5" />
                         </button>
                         <button
                           onClick={() => handleDelete(patient.id)}
-                          className="p-2 hover:bg-red-50 rounded text-red-600"
+                          className="p-1.5 sm:p-2 hover:bg-red-50 rounded text-red-600"
                           title="Delete"
                         >
-                          <Trash2 size={18} />
+                          <Trash2 size={16} className="sm:w-5 sm:h-5" />
                         </button>
                       </div>
                     </td>

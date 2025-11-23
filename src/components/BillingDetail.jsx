@@ -103,18 +103,18 @@ function BillingDetail({ bill, onClose }) {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-40 z-50 overflow-y-auto">
-      <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="min-h-screen flex items-center justify-center p-3 sm:p-4">
         <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl">
           {/* Header */}
-          <div className="sticky top-0 bg-white flex justify-between items-center p-8 border-b border-gray-200 rounded-t-xl gap-4">
+          <div className="sticky top-0 bg-white flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 sm:p-8 border-b border-gray-200 rounded-t-xl gap-3 sm:gap-4">
             <div className="flex-1">
-              <h2 className="text-3xl font-bold text-gray-900">Billing Invoice</h2>
+              <h2 className="text-xl sm:text-3xl font-bold text-gray-900">Billing Invoice</h2>
             </div>
-            <div className="flex gap-2 items-center">
+            <div className="flex gap-2 items-center w-full sm:w-auto">
               <select
                 value={billStatus}
                 onChange={(e) => setBillStatus(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium"
+                className="px-2 sm:px-3 py-1.5 sm:py-2 border border-gray-300 rounded-lg text-xs sm:text-sm font-medium flex-1 sm:flex-none"
               >
                 <option value="Pending">Pending</option>
                 <option value="Paid">Paid</option>
@@ -123,24 +123,24 @@ function BillingDetail({ bill, onClose }) {
                 <button
                   onClick={handleStatusUpdate}
                   disabled={isUpdating}
-                  className="px-4 py-2 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 disabled:opacity-50"
+                  className="px-2 sm:px-4 py-1.5 sm:py-2 bg-primary-600 text-white rounded-lg font-medium hover:bg-primary-700 disabled:opacity-50 text-xs sm:text-sm whitespace-nowrap"
                 >
                   {isUpdating ? 'Updating...' : 'Update'}
                 </button>
               )}
+              <button
+                onClick={onClose}
+                className="text-gray-500 hover:text-gray-700 p-1.5 hover:bg-gray-100 rounded-lg transition-colors flex-shrink-0"
+              >
+                <X size={20} className="sm:w-7 sm:h-7" />
+              </button>
             </div>
-            <button
-              onClick={onClose}
-              className="text-gray-500 hover:text-gray-700 p-2 hover:bg-gray-100 rounded-lg transition-colors"
-            >
-              <X size={28} />
-            </button>
           </div>
 
           {/* Invoice Content - Printable */}
           <div
             ref={printRef}
-            className="p-8 space-y-6 bg-white"
+            className="p-4 sm:p-8 space-y-4 sm:space-y-6 bg-white"
             style={{
               fontSize: '14px',
               fontFamily: 'Arial, sans-serif',
@@ -391,20 +391,20 @@ function BillingDetail({ bill, onClose }) {
           </div>
 
           {/* Action Buttons */}
-          <div className="sticky bottom-0 bg-white flex gap-3 justify-end p-8 border-t border-gray-200">
-            <button onClick={handlePrint} className="btn-secondary flex items-center gap-2">
-              <Printer size={18} />
-              Print
+          <div className="sticky bottom-0 bg-white flex flex-col sm:flex-row gap-2 sm:gap-3 justify-end p-4 sm:p-8 border-t border-gray-200">
+            <button onClick={handlePrint} className="btn-secondary flex items-center justify-center gap-2 order-3 sm:order-1">
+              <Printer size={16} className="sm:w-5 sm:h-5" />
+              <span className="hidden sm:inline">Print</span>
             </button>
-            <button onClick={handleDownloadPDF} className="btn-secondary flex items-center gap-2">
-              <Download size={18} />
-              Download PDF
+            <button onClick={handleDownloadPDF} className="btn-secondary flex items-center justify-center gap-2 order-2 sm:order-2">
+              <Download size={16} className="sm:w-5 sm:h-5" />
+              <span className="hidden sm:inline">Download PDF</span>
             </button>
-            <button onClick={handleDelete} disabled={loading} className="btn-danger flex items-center gap-2">
-              <Trash2 size={18} />
-              {loading ? 'Deleting...' : 'Delete'}
+            <button onClick={handleDelete} disabled={loading} className="btn-danger flex items-center justify-center gap-2 order-1 sm:order-3">
+              <Trash2 size={16} className="sm:w-5 sm:h-5" />
+              <span className="hidden sm:inline">{loading ? 'Deleting...' : 'Delete'}</span>
             </button>
-            <button onClick={onClose} className="btn-secondary">
+            <button onClick={onClose} className="btn-secondary w-full sm:w-auto order-4">
               Close
             </button>
           </div>

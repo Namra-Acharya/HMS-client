@@ -5,12 +5,22 @@ function AboutUs() {
   return (
     <div className="space-y-8">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-primary-50 to-primary-100 rounded-xl p-12 shadow-lg border border-primary-200">
-        <div className="flex items-center gap-4 mb-4">
+      <div className="bg-gradient-to-r from-primary-50 to-primary-100 rounded-xl p-6 sm:p-12 shadow-lg border border-primary-200">
+        {/* Mobile Layout */}
+        <div className="md:hidden flex flex-col items-center gap-3">
+          <img src="https://cdn.builder.io/api/v1/image/assets%2F521006238d0c488b88ea924156fa8e07%2F99f3a89b07dd47cebd53e1166682c659?format=webp&width=800" alt="Nexus Group" className="h-12 object-contain" />
+          <div className="text-center">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Nexus Group</h1>
+            <p className="text-primary-700 text-sm sm:text-base">Professional software developers</p>
+          </div>
+        </div>
+
+        {/* Desktop Layout */}
+        <div className="hidden md:flex items-center gap-4">
           <img src="https://cdn.builder.io/api/v1/image/assets%2F521006238d0c488b88ea924156fa8e07%2F99f3a89b07dd47cebd53e1166682c659?format=webp&width=800" alt="Nexus Group" className="h-16 object-contain" />
           <div>
             <h1 className="text-4xl font-bold text-gray-900">Nexus Group</h1>
-            <p className="text-primary-700 text-lg">Professional Hospital Information Management System</p>
+            <p className="text-primary-700 text-lg">Professional software developers</p>
           </div>
         </div>
       </div>

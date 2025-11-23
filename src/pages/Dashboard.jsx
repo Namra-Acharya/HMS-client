@@ -35,27 +35,27 @@ function Dashboard() {
   const StatCard = ({ icon: Icon, label, value, bgColor, iconColor, trend }) => (
     <div className="stat-card">
       <div className="flex items-center justify-between mb-3">
-        <div className={`p-3 rounded-lg ${bgColor}`}>
-          <Icon size={24} className={iconColor} />
+        <div className={`p-2 sm:p-3 rounded-lg ${bgColor}`}>
+          <Icon size={20} className={`sm:w-6 sm:h-6 ${iconColor}`} />
         </div>
         {trend && <span className="text-success text-xs font-semibold">{trend}</span>}
       </div>
-      <p className="text-medical-600 text-sm font-medium mb-1">{label}</p>
-      <p className="text-2xl font-bold text-medical-900">{value}</p>
+      <p className="text-medical-600 text-xs sm:text-sm font-medium mb-1">{label}</p>
+      <p className="text-xl sm:text-2xl font-bold text-medical-900">{value}</p>
     </div>
   );
 
   return (
-    <div className="space-y-8">
-      <div className="flex justify-between items-center">
+    <div className="space-y-6 sm:space-y-8">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-0">
         <h1 className="page-title">Hospital Dashboard</h1>
-        <button onClick={loadDashboardData} className="btn-primary">
+        <button onClick={loadDashboardData} className="btn-primary w-full sm:w-auto">
           Refresh
         </button>
       </div>
 
       {/* Primary Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
         <StatCard
           icon={Users}
           label="OPD Patients"
@@ -87,7 +87,7 @@ function Dashboard() {
       </div>
 
       {/* Secondary Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
         <StatCard
           icon={TrendingUp}
           label="Discharges Today"
@@ -166,47 +166,47 @@ function Dashboard() {
 
       {/* Quick Actions */}
       <div>
-        <h2 className="section-title mb-6">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <h2 className="section-title mb-4 sm:mb-6">Quick Actions</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
           <a
             href="/patients"
-            className="card cursor-pointer text-center p-8 group"
+            className="card cursor-pointer text-center p-4 sm:p-6 md:p-8 group"
           >
-            <div className="bg-primary-50 group-hover:bg-primary-100 rounded-lg p-4 mx-auto w-fit mb-4 transition-colors">
-              <Users size={32} className="text-primary-700" />
+            <div className="bg-primary-50 group-hover:bg-primary-100 rounded-lg p-3 mx-auto w-fit mb-3 sm:mb-4 transition-colors">
+              <Users size={24} className="sm:w-8 sm:h-8 text-primary-700" />
             </div>
-            <h3 className="font-semibold text-medical-900">Manage Patients</h3>
-            <p className="text-sm text-medical-600 mt-2">Add & view patient records</p>
+            <h3 className="font-semibold text-medical-900 text-sm sm:text-base">Manage Patients</h3>
+            <p className="text-xs sm:text-sm text-medical-600 mt-2">Add & view patient records</p>
           </a>
           <a
             href="/doctors"
-            className="card cursor-pointer text-center p-8 group"
+            className="card cursor-pointer text-center p-4 sm:p-6 md:p-8 group"
           >
-            <div className="bg-secondary-50 group-hover:bg-secondary-100 rounded-lg p-4 mx-auto w-fit mb-4 transition-colors">
-              <Users size={32} className="text-secondary-700" />
+            <div className="bg-secondary-50 group-hover:bg-secondary-100 rounded-lg p-3 mx-auto w-fit mb-3 sm:mb-4 transition-colors">
+              <Users size={24} className="sm:w-8 sm:h-8 text-secondary-700" />
             </div>
-            <h3 className="font-semibold text-medical-900">Manage Doctors</h3>
-            <p className="text-sm text-medical-600 mt-2">Manage doctor assignments</p>
+            <h3 className="font-semibold text-medical-900 text-sm sm:text-base">Manage Doctors</h3>
+            <p className="text-xs sm:text-sm text-medical-600 mt-2">Manage doctor assignments</p>
           </a>
           <a
             href="/billing"
-            className="card cursor-pointer text-center p-8 group"
+            className="card cursor-pointer text-center p-4 sm:p-6 md:p-8 group"
           >
-            <div className="bg-emerald-50 group-hover:bg-emerald-100 rounded-lg p-4 mx-auto w-fit mb-4 transition-colors">
-              <DollarSign size={32} className="text-success" />
+            <div className="bg-emerald-50 group-hover:bg-emerald-100 rounded-lg p-3 mx-auto w-fit mb-3 sm:mb-4 transition-colors">
+              <DollarSign size={24} className="sm:w-8 sm:h-8 text-success" />
             </div>
-            <h3 className="font-semibold text-medical-900">Generate Bill</h3>
-            <p className="text-sm text-medical-600 mt-2">Create discharge bills</p>
+            <h3 className="font-semibold text-medical-900 text-sm sm:text-base">Generate Bill</h3>
+            <p className="text-xs sm:text-sm text-medical-600 mt-2">Create discharge bills</p>
           </a>
           <a
             href="/reports"
-            className="card cursor-pointer text-center p-8 group"
+            className="card cursor-pointer text-center p-4 sm:p-6 md:p-8 group"
           >
-            <div className="bg-primary-50 group-hover:bg-primary-100 rounded-lg p-4 mx-auto w-fit mb-4 transition-colors">
-              <TrendingUp size={32} className="text-primary-700" />
+            <div className="bg-primary-50 group-hover:bg-primary-100 rounded-lg p-3 mx-auto w-fit mb-3 sm:mb-4 transition-colors">
+              <TrendingUp size={24} className="sm:w-8 sm:h-8 text-primary-700" />
             </div>
-            <h3 className="font-semibold text-medical-900">View Reports</h3>
-            <p className="text-sm text-medical-600 mt-2">Hospital statistics & analytics</p>
+            <h3 className="font-semibold text-medical-900 text-sm sm:text-base">View Reports</h3>
+            <p className="text-xs sm:text-sm text-medical-600 mt-2">Hospital statistics & analytics</p>
           </a>
         </div>
       </div>

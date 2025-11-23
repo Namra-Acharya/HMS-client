@@ -19,35 +19,35 @@ body {
 
 @layer components {
   .btn-primary {
-    @apply px-4 py-2.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 font-semibold shadow-md hover:shadow-lg active:scale-95;
+    @apply px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-primary-600 to-primary-700 text-white rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-200 font-semibold shadow-md hover:shadow-lg active:scale-95 text-sm sm:text-base;
   }
 
   .btn-secondary {
-    @apply px-4 py-2.5 bg-medical-200 text-medical-900 rounded-lg hover:bg-medical-300 transition-all duration-200 font-semibold border border-medical-300 hover:border-medical-400;
+    @apply px-3 sm:px-4 py-2 sm:py-2.5 bg-medical-200 text-medical-900 rounded-lg hover:bg-medical-300 transition-all duration-200 font-semibold border border-medical-300 hover:border-medical-400 text-sm sm:text-base;
   }
 
   .btn-danger {
-    @apply px-4 py-2.5 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200 font-semibold shadow-md hover:shadow-lg active:scale-95;
+    @apply px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-red-600 to-red-700 text-white rounded-lg hover:from-red-700 hover:to-red-800 transition-all duration-200 font-semibold shadow-md hover:shadow-lg active:scale-95 text-sm sm:text-base;
   }
 
   .btn-success {
-    @apply px-4 py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-lg hover:from-emerald-700 hover:to-emerald-800 transition-all duration-200 font-semibold shadow-md hover:shadow-lg active:scale-95;
+    @apply px-3 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 text-white rounded-lg hover:from-emerald-700 hover:to-emerald-800 transition-all duration-200 font-semibold shadow-md hover:shadow-lg active:scale-95 text-sm sm:text-base;
   }
 
   .card {
-    @apply bg-white rounded-lg shadow-sm border border-medical-100 p-6 transition-all duration-200 hover:shadow-md hover:border-primary-200;
+    @apply bg-white rounded-lg shadow-sm border border-medical-100 p-4 sm:p-6 transition-all duration-200 hover:shadow-md hover:border-primary-200;
   }
 
   .card-header {
-    @apply border-b border-medical-200 pb-4 mb-6;
+    @apply border-b border-medical-200 pb-3 sm:pb-4 mb-4 sm:mb-6;
   }
 
   .stat-card {
-    @apply bg-white rounded-lg shadow-sm border border-medical-100 p-6 transition-all duration-300 hover:shadow-lg hover:border-primary-300 hover:-translate-y-1;
+    @apply bg-white rounded-lg shadow-sm border border-medical-100 p-4 sm:p-6 transition-all duration-300 hover:shadow-lg hover:border-primary-300 hover:-translate-y-1;
   }
 
   .input-field {
-    @apply w-full px-4 py-2.5 border border-medical-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white text-medical-900 placeholder-medical-400;
+    @apply w-full px-3 sm:px-4 py-2 sm:py-2.5 border border-medical-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all bg-white text-medical-900 placeholder-medical-400 text-sm sm:text-base;
   }
 
   .input-field:disabled {
@@ -55,27 +55,27 @@ body {
   }
 
   .form-group {
-    @apply mb-5;
+    @apply mb-4 sm:mb-5;
   }
 
   .form-label {
-    @apply block text-sm font-semibold text-medical-800 mb-2;
+    @apply block text-xs sm:text-sm font-semibold text-medical-800 mb-2;
   }
 
   .table-responsive {
-    @apply overflow-x-auto rounded-lg;
+    @apply overflow-x-auto rounded-lg -mx-4 sm:mx-0 px-4 sm:px-0;
   }
 
   .table {
-    @apply w-full border-collapse text-sm;
+    @apply w-full border-collapse text-xs sm:text-sm;
   }
 
   .table th {
-    @apply bg-gradient-to-r from-medical-50 to-medical-100 px-4 py-3 text-left font-semibold text-medical-700 border-b-2 border-medical-200 sticky top-0;
+    @apply bg-gradient-to-r from-medical-50 to-medical-100 px-2 sm:px-4 py-2 sm:py-3 text-left font-semibold text-medical-700 border-b-2 border-medical-200 sticky top-0 whitespace-nowrap;
   }
 
   .table td {
-    @apply px-4 py-3 border-b border-medical-100;
+    @apply px-2 sm:px-4 py-2 sm:py-3 border-b border-medical-100 text-xs sm:text-sm;
   }
 
   .table tbody tr {
@@ -87,7 +87,7 @@ body {
   }
 
   .badge {
-    @apply inline-block px-3 py-1.5 rounded-full text-xs font-semibold;
+    @apply inline-block px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-xs font-semibold;
   }
 
   .badge-success {
@@ -107,11 +107,11 @@ body {
   }
 
   .modal-overlay {
-    @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm;
+    @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 backdrop-blur-sm p-4;
   }
 
   .modal-content {
-    @apply bg-white rounded-xl shadow-2xl p-10 max-w-2xl w-full mx-4;
+    @apply bg-white rounded-xl shadow-2xl p-6 sm:p-10 max-w-2xl w-full mx-auto max-h-[90vh] overflow-y-auto;
   }
 }
 
@@ -129,14 +129,14 @@ body {
   }
 
   .page-title {
-    @apply text-3xl font-bold text-medical-900;
+    @apply text-xl sm:text-2xl md:text-3xl font-bold text-medical-900;
   }
 
   .section-title {
-    @apply text-xl font-bold text-medical-900;
+    @apply text-lg sm:text-xl font-bold text-medical-900;
   }
 
   .subsection-title {
-    @apply text-lg font-semibold text-medical-800;
+    @apply text-base sm:text-lg font-semibold text-medical-800;
   }
 }

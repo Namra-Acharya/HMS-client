@@ -28,27 +28,27 @@ function PatientDetail({ patient, onClose }) {
   return (
     <div className="modal-overlay">
       <div className="modal-content max-w-3xl">
-        <div className="flex justify-between items-center mb-6">
-          <h2 className="text-2xl font-bold text-gray-900">Patient Details</h2>
-          <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+        <div className="flex justify-between items-center mb-4 sm:mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Patient Details</h2>
+          <button onClick={onClose} className="text-gray-500 hover:text-gray-700 p-1">
             <X size={24} />
           </button>
         </div>
 
-        <div className="space-y-6 max-h-96 overflow-y-auto pb-6">
+        <div className="space-y-4 sm:space-y-6 max-h-96 overflow-y-auto pb-4 sm:pb-6">
           {/* Header with ID and Status */}
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex justify-between items-start">
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4 flex justify-between items-start">
             <div>
-              <p className="text-sm text-gray-600 mb-1">Patient ID</p>
-              <p className="font-mono font-bold text-blue-600 text-lg">{patient.id}</p>
+              <p className="text-xs sm:text-sm text-gray-600 mb-1">Patient ID</p>
+              <p className="font-mono font-bold text-blue-600 text-base sm:text-lg">{patient.id}</p>
             </div>
             <span className={`badge ${patient.status === 'Admitted' ? 'badge-success' : 'badge-info'}`}>{patient.status}</span>
           </div>
 
           {/* Personal Information */}
           <div>
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Personal Information</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">Personal Information</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
                 <p className="text-sm text-gray-600">Full Name</p>
                 <p className="font-semibold text-gray-900">{patient.name}</p>
@@ -78,8 +78,8 @@ function PatientDetail({ patient, onClose }) {
 
           {/* Vitals */}
           <div>
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Vitals</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">Vitals</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
                 <p className="text-sm text-gray-600">Weight</p>
                 <p className="font-semibold text-gray-900">{patient.weight ? `${patient.weight} kg` : 'N/A'}</p>
@@ -97,8 +97,8 @@ function PatientDetail({ patient, onClose }) {
 
           {/* Medical Information */}
           <div>
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Medical Information</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">Medical Information</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
                 <p className="text-sm text-gray-600">Disease/Condition</p>
                 <p className="font-semibold text-gray-900">{patient.disease}</p>
@@ -128,8 +128,8 @@ function PatientDetail({ patient, onClose }) {
 
           {/* Doctor Information */}
           <div>
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Doctor Assignment</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">Doctor Assignment</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
                 <p className="text-sm text-gray-600">Assigned Doctor</p>
                 <p className="font-semibold text-gray-900">{patient.assignedDoctor || 'Not assigned'}</p>
@@ -143,8 +143,8 @@ function PatientDetail({ patient, onClose }) {
 
           {/* Admission Dates */}
           <div>
-            <h3 className="text-lg font-bold text-gray-900 mb-4">Admission Dates</h3>
-            <div className="grid grid-cols-2 gap-4">
+            <h3 className="text-base sm:text-lg font-bold text-gray-900 mb-3 sm:mb-4">Admission Dates</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div>
                 <p className="text-sm text-gray-600">Admission Date</p>
                 <p className="font-semibold text-gray-900">{new Date(patient.admissionDate).toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' })}</p>
@@ -160,21 +160,21 @@ function PatientDetail({ patient, onClose }) {
         </div>
 
         {/* Action Buttons */}
-        <div className="flex gap-3 justify-end pt-6 border-t border-gray-200">
-          <button className="btn-secondary flex items-center gap-2">
-            <Printer size={18} />
-            Print
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 justify-end pt-4 sm:pt-6 border-t border-gray-200">
+          <button className="btn-secondary flex items-center justify-center gap-2">
+            <Printer size={16} className="sm:w-5 sm:h-5" />
+            <span className="hidden sm:inline">Print</span>
           </button>
-          <button className="btn-secondary flex items-center gap-2">
-            <Download size={18} />
-            Download
+          <button className="btn-secondary flex items-center justify-center gap-2">
+            <Download size={16} className="sm:w-5 sm:h-5" />
+            <span className="hidden sm:inline">Download</span>
           </button>
           {patient.status === 'Admitted' && (
-            <button onClick={handleDischarge} disabled={loading} className="btn-danger">
+            <button onClick={handleDischarge} disabled={loading} className="btn-danger w-full sm:w-auto">
               {loading ? 'Discharging...' : 'Discharge Patient'}
             </button>
           )}
-          <button onClick={onClose} className="btn-secondary">
+          <button onClick={onClose} className="btn-secondary w-full sm:w-auto">
             Close
           </button>
         </div>
