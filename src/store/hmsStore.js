@@ -109,13 +109,18 @@ const useHMSStore = create(
 
         // Authentication
         isAuthenticated: false,
-        setIsAuthenticated: (authenticated) => set({ isAuthenticated: authenticated })
+        setIsAuthenticated: (authenticated) => set({ isAuthenticated: authenticated }),
+        _hasHydrated: false,
+        setHasHydrated: (state) => set({ _hasHydrated: state })
       }),
       {
         name: 'hms-store',
         partialize: (state) => ({
           isAuthenticated: state.isAuthenticated
-        })
+        }),
+        onRehydrateStorage: () => (state) => {
+          state.setHasHydrated(true);
+        }
       }
     )
   )
