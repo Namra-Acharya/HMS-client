@@ -18,29 +18,13 @@ function Login() {
     checkIfPasswordSet();
   }, []);
 
-  const checkIfPasswordSet = async () => {
-    try {
-      const apiUrl = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/auth/check-password` : '/api/auth/check-password';
-      const response = await fetch(apiUrl);
-
-      if (!response.ok) {
-        console.error('Server response not OK:', response.status);
-        setIsSetup(true);
-        setCheckingPassword(false);
-        return;
-      }
-
-      const data = await response.json();
-      setIsSetup(!data.passwordSet);
-    } catch (error) {
-      console.error('Error checking password:', error);
-      setIsSetup(true);
-    } finally {
-      setCheckingPassword(false);
-    }
+  const checkIfPasswordSet = () => {
+    const storedPassword = localStorage.getItem('hms-password');
+    setIsSetup(!storedPassword);
+    setCheckingPassword(false);
   };
 
-  const handleSetupSubmit = async (e) => {
+  const handleSetupSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
@@ -58,29 +42,11 @@ function Login() {
     }
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/auth/initialize-password` : '/api/auth/initialize-password';
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password: setupPassword })
-      });
-
-      if (!response.ok) {
-        setError(`Server error: ${response.status}`);
-        setLoading(false);
-        return;
-      }
-
-      const data = await response.json();
-
-      if (data.success) {
-        setNotification({ type: 'success', message: 'Password setup successful' });
-        setIsSetup(false);
-        setSetupPassword('');
-        setSetupConfirm('');
-      } else {
-        setError(data.error || 'Failed to setup password');
-      }
+      localStorage.setItem('hms-password', setupPassword);
+      setNotification({ type: 'success', message: 'Password setup successful' });
+      setIsSetup(false);
+      setSetupPassword('');
+      setSetupConfirm('');
     } catch (error) {
       setError('Failed to setup password. Please try again: ' + error.message);
       console.error('Setup error:', error);
@@ -89,39 +55,33 @@ function Login() {
     }
   };
 
-  const handleLoginSubmit = async (e) => {
+  const handleLoginSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL ? `${import.meta.env.VITE_API_URL}/api/auth/verify-password` : '/api/auth/verify-password';
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password })
-      });
+      const storedPassword = localStorage.getItem('hms-password');
 
-      if (!response.ok) {
-        setError(`Server error: ${response.status}`);
+      if (!storedPassword) {
+        setError('Password not set. Please set a password first.');
         setLoading(false);
         return;
       }
 
-      const data = await response.json();
-
-      if (data.success) {
-        setIsAuthenticated(true);
-        setNotification({ type: 'success', message: 'Login successful' });
-        navigate('/dashboard');
-      } else {
-        setError(data.error || 'Invalid password');
+      if (password !== storedPassword) {
+        setError('Invalid password');
         setPassword('');
+        setLoading(false);
+        return;
       }
+
+      setIsAuthenticated(true);
+      setNotification({ type: 'success', message: 'Login successful' });
+      navigate('/dashboard');
     } catch (error) {
       setError('Failed to verify password. Please try again: ' + error.message);
       console.error('Login error:', error);
-    } finally {
       setLoading(false);
     }
   };

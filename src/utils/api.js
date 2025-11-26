@@ -213,56 +213,59 @@ export const billingAPI = {
 
 // Dashboard API
 export const dashboardAPI = {
-  getStats: () =>
-    isOnline
-      ? api.get('/dashboard/stats').then((r) => r.data).catch(() =>
-          Promise.resolve({
-            success: true,
-            data: {
-              totalOPDPatients: 0,
-              totalIPDPatients: 0,
-              icuOccupiedBeds: 0,
-              admissionsToday: 0,
-              dischargesToday: 0,
-              totalDoctors: 0,
-              totalNurses: 0,
-              totalRevenue: 0
-            },
-            offline: true
-          })
-        )
-      : Promise.resolve({
-          success: true,
-          data: {
-            totalOPDPatients: 0,
-            totalIPDPatients: 0,
-            icuOccupiedBeds: 0,
-            admissionsToday: 0,
-            dischargesToday: 0,
-            totalDoctors: 0,
-            totalNurses: 0,
-            totalRevenue: 0
-          }
-        }),
-  getRecentPatients: () =>
-    isOnline
-      ? api.get('/dashboard/recent-patients').then((r) => r.data).catch(() =>
-          offlineDB.getAllPatients().then((patients) => ({
-            success: true,
-            data: patients.filter((p) => p.status === 'Admitted').slice(0, 10),
-            offline: true
-          }))
-        )
-      : offlineDB.getAllPatients().then((patients) => ({
-          success: true,
-          data: patients.filter((p) => p.status === 'Admitted').slice(0, 10)
-        })),
-  getDailyReport: (params) =>
-    isOnline
-      ? api.get('/dashboard/daily-report', { params }).then((r) => r.data).catch(() =>
-          Promise.resolve({ success: true, data: {}, offline: true })
-        )
-      : Promise.resolve({ success: true, data: {} })
+  getStats: async () => {
+    try {
+      if (isOnline) {
+        return await api.get('/dashboard/stats').then((r) => r.data);
+      }
+    } catch (error) {
+      console.log('📴 Dashboard stats API failed, using offline data');
+    }
+
+    return {
+      success: true,
+      data: {
+        totalOPDPatients: 0,
+        totalIPDPatients: 0,
+        icuOccupiedBeds: 0,
+        admissionsToday: 0,
+        dischargesToday: 0,
+        totalDoctors: 0,
+        totalNurses: 0,
+        totalRevenue: 0
+      },
+      offline: true
+    };
+  },
+
+  getRecentPatients: async () => {
+    try {
+      if (isOnline) {
+        return await api.get('/dashboard/recent-patients').then((r) => r.data);
+      }
+    } catch (error) {
+      console.log('📴 Recent patients API failed, using offline data');
+    }
+
+    const patients = await offlineDB.getAllPatients();
+    return {
+      success: true,
+      data: patients.filter((p) => p.status === 'Admitted').slice(0, 10),
+      offline: true
+    };
+  },
+
+  getDailyReport: async (params) => {
+    try {
+      if (isOnline) {
+        return await api.get('/dashboard/daily-report', { params }).then((r) => r.data);
+      }
+    } catch (error) {
+      console.log('📴 Daily report API failed');
+    }
+
+    return { success: true, data: {}, offline: true };
+  }
 };
 
 // Archive API
