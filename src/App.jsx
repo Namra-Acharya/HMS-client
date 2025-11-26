@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import useHMSStore from './store/hmsStore';
 import Layout from './components/Layout';
@@ -17,13 +17,18 @@ import MonthlyArchives from './pages/MonthlyArchives';
 import AboutUs from './pages/AboutUs';
 import Settings from './pages/Settings';
 
-function App() {
-  const { setIsOnline, isAuthenticated } = useHMSStore();
-  const [isReady, setIsReady] = useState(false);
+function ProtectedRoute({ children }) {
+  const { isAuthenticated } = useHMSStore();
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
+  
+  return children;
+}
 
-  useEffect(() => {
-    setIsReady(true);
-  }, []);
+function App() {
+  const { setIsOnline } = useHMSStore();
 
   useEffect(() => {
     const handleOnline = () => setIsOnline(true);
@@ -38,41 +43,77 @@ function App() {
     };
   }, [setIsOnline]);
 
-  if (!isReady) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-12 sm:w-16 h-12 sm:h-16 bg-white rounded-full flex items-center justify-center shadow-lg mx-auto mb-3 sm:mb-4">
-            <span className="text-2xl sm:text-3xl">🏥</span>
-          </div>
-          <p className="text-white text-base sm:text-lg font-medium">Loading...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return <Login />;
-  }
-
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<Login />} />
+        
         <Route element={<Layout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/patients" element={<PatientManagement />} />
-          <Route path="/discharged" element={<DischargedPatients />} />
-          <Route path="/doctors" element={<DoctorManagement />} />
-          <Route path="/nurses" element={<NurseManagement />} />
-          <Route path="/opd" element={<OPDManagement />} />
-          <Route path="/ipd" element={<IPDManagement />} />
-          <Route path="/icu" element={<ICUManagement />} />
-          <Route path="/billing" element={<BillingManagement />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/archives" element={<MonthlyArchives />} />
-          <Route path="/about" element={<AboutUs />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/patients" element={
+            <ProtectedRoute>
+              <PatientManagement />
+            </ProtectedRoute>
+          } />
+          <Route path="/discharged" element={
+            <ProtectedRoute>
+              <DischargedPatients />
+            </ProtectedRoute>
+          } />
+          <Route path="/doctors" element={
+            <ProtectedRoute>
+              <DoctorManagement />
+            </ProtectedRoute>
+          } />
+          <Route path="/nurses" element={
+            <ProtectedRoute>
+              <NurseManagement />
+            </ProtectedRoute>
+          } />
+          <Route path="/opd" element={
+            <ProtectedRoute>
+              <OPDManagement />
+            </ProtectedRoute>
+          } />
+          <Route path="/ipd" element={
+            <ProtectedRoute>
+              <IPDManagement />
+            </ProtectedRoute>
+          } />
+          <Route path="/icu" element={
+            <ProtectedRoute>
+              <ICUManagement />
+            </ProtectedRoute>
+          } />
+          <Route path="/billing" element={
+            <ProtectedRoute>
+              <BillingManagement />
+            </ProtectedRoute>
+          } />
+          <Route path="/reports" element={
+            <ProtectedRoute>
+              <Reports />
+            </ProtectedRoute>
+          } />
+          <Route path="/archives" element={
+            <ProtectedRoute>
+              <MonthlyArchives />
+            </ProtectedRoute>
+          } />
+          <Route path="/about" element={
+            <ProtectedRoute>
+              <AboutUs />
+            </ProtectedRoute>
+          } />
+          <Route path="/settings" element={
+            <ProtectedRoute>
+              <Settings />
+            </ProtectedRoute>
+          } />
         </Route>
       </Routes>
     </BrowserRouter>

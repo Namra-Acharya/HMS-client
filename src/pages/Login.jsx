@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Lock, AlertCircle } from 'lucide-react';
 import useHMSStore from '../store/hmsStore';
 
 function Login() {
+  const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -111,6 +113,7 @@ function Login() {
       if (data.success) {
         setIsAuthenticated(true);
         setNotification({ type: 'success', message: 'Login successful' });
+        navigate('/dashboard');
       } else {
         setError(data.error || 'Invalid password');
         setPassword('');
