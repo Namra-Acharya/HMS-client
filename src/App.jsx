@@ -31,6 +31,13 @@ function App() {
   const { setIsOnline } = useHMSStore();
 
   useEffect(() => {
+    // Redirect to home on any page refresh
+    if (window.location.pathname !== '/') {
+      window.location.href = '/';
+    }
+  }, []);
+
+  useEffect(() => {
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
 
