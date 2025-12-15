@@ -182,7 +182,14 @@ function BillingManagement() {
                         >
                           <Eye size={18} />
                         </button>
-                        <button className="p-2 hover:bg-green-50 rounded text-green-600" title="Print Bill">
+                        <button
+                          onClick={() => {
+                            setSelectedBill(bill);
+                            setShowDetail(true);
+                          }}
+                          className="p-2 hover:bg-green-50 rounded text-green-600"
+                          title="Print Bill"
+                        >
                           <Printer size={18} />
                         </button>
                         <button
