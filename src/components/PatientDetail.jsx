@@ -68,25 +68,13 @@ function PatientDetail({ patient, onClose }) {
       const pdf = new jsPDF('p', 'mm', 'a4');
       const imgWidth = 210;
       const pageHeight = 297;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-      if (imgHeight <= pageHeight) {
-        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-      } else {
-        let heightLeft = imgHeight;
-        let position = 0;
-
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-
-        while (heightLeft > 0) {
-          position = heightLeft - imgHeight;
-          pdf.addPage();
-          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-          heightLeft -= pageHeight;
-        }
+      if (imgHeight > pageHeight) {
+        imgHeight = pageHeight;
       }
 
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
       pdf.save(`Patient-${patient.id}.pdf`);
       setNotification({ type: 'success', message: 'Patient details downloaded successfully' });
     } catch (error) {
@@ -245,11 +233,18 @@ function PatientDetail({ patient, onClose }) {
           }}
         >
           {/* Header */}
-          <div style={{ textAlign: 'center', marginBottom: '20px', borderBottom: '2px solid #0369a1', paddingBottom: '15px' }}>
-            <h1 style={{ margin: '0 0 5px 0', color: '#0369a1', fontSize: '24px', fontWeight: 'bold' }}>
-              🏥 HOSPITAL MANAGEMENT SYSTEM
-            </h1>
-            <p style={{ margin: '5px 0 0 0', color: '#666', fontSize: '12px' }}>Patient Record Document</p>
+          <div style={{ position: 'relative', marginBottom: '20px', borderBottom: '2px solid #0369a1', paddingBottom: '15px' }}>
+            <div style={{ textAlign: 'center' }}>
+              <h1 style={{ margin: '0 0 5px 0', color: '#0369a1', fontSize: '24px', fontWeight: 'bold' }}>
+                🏥 HOSPITAL MANAGEMENT SYSTEM
+              </h1>
+              <p style={{ margin: '5px 0 0 0', color: '#666', fontSize: '12px' }}>Patient Record Document</p>
+            </div>
+            <div style={{ position: 'absolute', top: '0', right: '0', fontSize: '12px', color: '#666' }}>
+              <p style={{ margin: '0' }}>
+                {new Date().toLocaleDateString('en-IN', { year: 'numeric', month: 'long', day: 'numeric' })}
+              </p>
+            </div>
           </div>
 
           {/* Info Grid - Two Columns */}
@@ -385,46 +380,7 @@ function PatientDetail({ patient, onClose }) {
             </div>
           </div>
 
-          {/* Dates Card */}
-          <div style={{ backgroundColor: '#ecf0f1', border: '1px solid #bdc3c7', borderRadius: '6px', padding: '12px', marginBottom: '15px' }}>
-            <h3 style={{ margin: '0 0 10px 0', color: '#34495e', fontSize: '13px', fontWeight: 'bold', textTransform: 'uppercase' }}>
-              Admission Timeline
-            </h3>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', fontSize: '11px' }}>
-              <div>
-                <span style={{ color: '#666', display: 'block', marginBottom: '3px' }}>Admission Date:</span>
-                <span style={{ fontWeight: 'bold', color: '#1f2937', display: 'block' }}>
-                  {new Date(patient.admissionDate).toLocaleDateString('en-IN', {
-                    year: 'numeric',
-                    month: 'short',
-                    day: 'numeric'
-                  })}
-                </span>
-              </div>
-              {patient.dischargeDate && (
-                <div>
-                  <span style={{ color: '#666', display: 'block', marginBottom: '3px' }}>Discharge Date:</span>
-                  <span style={{ fontWeight: 'bold', color: '#1f2937', display: 'block' }}>
-                    {new Date(patient.dischargeDate).toLocaleDateString('en-IN', {
-                      year: 'numeric',
-                      month: 'short',
-                      day: 'numeric'
-                    })}
-                  </span>
-                </div>
-              )}
-            </div>
-          </div>
 
-          {/* Footer */}
-          <div style={{ textAlign: 'center', borderTop: '1px solid #e5e7eb', paddingTop: '10px', marginTop: 'auto' }}>
-            <p style={{ margin: '5px 0', fontSize: '10px', color: '#666' }}>
-              Generated on: {new Date().toLocaleDateString('en-IN')} at {new Date().toLocaleTimeString('en-IN')}
-            </p>
-            <p style={{ margin: '3px 0 0 0', fontSize: '9px', color: '#999' }}>
-              This is a computer-generated patient record. No signature is required.
-            </p>
-          </div>
         </div>
 
         {/* Action Buttons */}
